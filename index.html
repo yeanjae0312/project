@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>원페이지구현 - 버거킹</title>
+    
+    <link href="./css/layout.css" rel="stylesheet" type="text/css">
+    
+    <!-- cousine 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Cousine&display=swap" rel="stylesheet">
+    
+    <!-- 나눔고딕 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    
+    <!-- CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- font -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            
+            $('aside').hide(); //top버튼 안보이게 숨기기
+            
+            function B_S(){
+                $('.bs_txt > h3').animate({
+                    'top':'15px'
+                },600).animate({
+                    'top':'-10px'
+                },600);
+            }
+            
+            var Timer = setInterval(B_S,600);
+            
+            
+            //내비게이션 메뉴 클릭시 해당하는 컨텐츠 상단에 올라오게 하기
+            $('.gnb li').click(function(){
+                var num = $(this).index();
+                console.log(num);
+                
+                //각 컨텐츠 article에 top 위치값을 변수에 저장
+                var con = $('section article').eq(num).offset().top;
+                
+                //각 컨텐츠 스크롤 높이 58픽셀까지 상단으로 애니메이션 되면서 올라감
+                $('html, body').animate({scrollTop:con-58},500);
+                
+                return false;
+                
+            });
+            
+            $(window).scroll(function(){
+                
+                var sPos = $(window).scrollTop();
+                $('#scroll').text(sPos);
+                
+                if(sPos >= 300 && sPos < 1000){
+                    //이벤트 이미지 양옆에서 나오게 하기
+                    $('.e_img_box1').animate({'left':'0px'},500);
+                    $('.e_img_box2').delay(500).animate({'right':'0px'},500);
+                }else if(sPos >= 1200 && sPos <2000){
+                    $('.m_img_box1').fadeIn(500);
+                    $('.m_img_box2').delay(500).fadeIn(500);
+                }
+                
+                if (sPos >= 500) { //만약에 스크롤 높이값이 200(1080)이상이 되면
+                    $('aside').fadeIn(); //aside 자연스럽게 나오게 하고
+                } else { //그렇지 않으면
+                    $('aside').fadeOut(); //aside를 다시 자연스럽게 사라지게 한다.
+                }
+                
+                
+                
+            });
+            
+            //top버튼 클릭시 자연스럽게 상단으로 올라가기
+            $('aside i').click(function() {  
+                $('html, body').animate({
+                    scrollTop: '0px'
+                }, 300);
+                return false; //새로고침이 안되게 해준다.
+            });
+            
+            
+            
+            
+        });
+    </script>
+    
+</head>
+<body>
+  
+<!--  <span id="scroll">0</span>-->
+   
+   <!-- 헤더영역 -->
+   <header>
+       <article class="h_top">
+           <h1>
+               <a href="index.html" title="메인페이지로">
+                   <img src="./img/header/logo.svg" alt="로고">
+               </a>
+           </h1>
+       </article>
+   </header>
+   
+   <nav class="gnb">
+     <ul>
+        <li><a href="#" title="이벤트">이벤트</a></li>
+        <li><a href="#" title="메뉴소개">메뉴소개</a></li>
+        <li><a href="#" title="브랜드 스토리">브랜드 스토리</a></li>
+        <li><a href="#" title="매장소개">매장소개</a></li>
+        <li><a href="#" title="문의하기">문의하기</a></li>
+     </ul>
+   </nav>
+    
+    
+    <!-- 콘텐츠 영역 -->
+    <section>
+        <div id="visual">
+            <div class="v_wrap">
+                <div><img src="./img/section/visual2.png" alt="비쥬얼이미지1"></div>
+<!--
+                <div><img src="./img/section/visual1.png" alt="비쥬얼이미지2"></div>
+                <div><img src="./img/section/visual3.png" alt="비쥬얼이미지3"></div>
+                <div><img src="./img/section/visual4.png" alt="비쥬얼이미지4"></div>
+-->
+            </div>
+        </div>
+        
+        <article id="event">
+           <div class="event_txt">
+            <h3>EVENT</h3>
+           </div>
+           
+           <div class="event_img_box">
+               <div class="e_img_box1">
+                   <img src="./img/section/event1.png" alt="이벤트1">
+                   <img src="./img/section/event2.png" alt="이벤트1">
+               </div>
+
+               <div class="e_img_box2">
+                   <img src="./img/section/event3.png" alt="이벤트1">
+                   <img src="./img/section/event4.png" alt="이벤트1">
+               </div>
+           </div> 
+           
+            
+        </article>
+        
+        <article id="hot_menu">
+           <h3>HOT MENU</h3>
+           
+            <a href="#" title="메뉴 더보기">메뉴 더보기&#43;</a>
+           
+            
+            <div class="m_img_box">
+                <div class="m_img_box1">
+                    <figure>
+                        <img src="./img/section/menu1.png" alt="기네스와퍼팩1">
+                        <figcaption>기네스와퍼팩1</figcaption>
+                    </figure>
+                </div>
+
+                <div class="m_img_box2">
+                    <img src="./img/section/menu2.png" alt="기네스와퍼팩2">
+                        <figcaption>기네스와퍼팩2</figcaption>
+                </div>
+            </div>
+        </article>
+        
+        <article id="brand_story">
+            <div class="bs_txt">
+                <h3>BRAND STORY</h3>
+            </div>
+            
+            <div class="bs_box">
+                <img src="./img/section/brandstory_img1.jpg" alt="브랜드스토리 이미지">
+                <img src="./img/section/brandstory_txt.PNG" alt="브랜드스토리 텍스트">
+                
+                <div class="brand_btn">
+                    <ul>
+                        <li><a href="#" title="버거킹 스토리">버거킹 스토리 ></a></li>
+                        <li><a href="#" title="WHY버거킹">WHY버거킹 ></a></li>
+                        <li><a href="#" title="버거킹NEWS">버거킹NEWS ></a></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </article>
+        
+        <article id="store_search">
+            <h3>SEARCH</h3>
+            
+            
+        </article>
+        
+        <article id="contact">
+            <form name="contact" method="post" action="contact_me1.php">
+               
+                <fieldset>
+                    <legend>CONTACT US</legend>
+
+                    <!-- 1.제목 -->
+                    <div class="field">
+                        <label for="subject">제목</label>
+                        <input type="text" name="subject" id="subject">
+                    </div>
+
+                    <!-- 2.이름 -->
+                    <div class="field">
+                        <label for="name">이름</label>
+                        <input type="text" name="name" id="name">
+                    </div>
+
+                    <!-- 3.이메일 -->
+                    <div class="field">
+                        <label for="email">이메일</label>
+                        <input type="email" placeholder="id@domain.com" name="email" id="email">
+                    </div>
+
+                    <!-- 4.내용 -->
+                    <div class="field">
+                        <label for="message"></label>
+                        <textarea name="message" id="message" rows="30" placeholder="내용을 입력하세요."></textarea>
+                    </div>
+
+                    <!-- 5.보내기, 취소 -->
+                    <ul class="enter_btn">
+                        <li><input type="submit" value="보내기"></li>
+                    </ul>
+
+                </fieldset>
+            </form>
+        </article>
+    </section>
+    
+    
+    <aside id="top_btn">
+        <i class="fas fa-angle-up"></i>
+    </aside>
+    
+    
+    <!-- 푸터영역 -->
+    <footer>
+        <div class="f_inner">
+            <img src="./img/footer/footer_logo.gif">
+            
+            <ul class="f_gnb">
+                <li><a href="#" title="이용약관">이용약관</a></li>
+                <li><a href="#" title="개인정보취급방침">개인정보취급방침</a></li>
+                <li><a href="#" title="법적고지">법적고지</a></li>
+            </ul>
+            
+            <div>
+                서울 종로구 삼봉로 000000 <br>
+                사업자 등록번호 : 000-00-00000 [주]BKR 대표이사 000 <br>
+                Copyright 2019 BKR Co.Ltd.All right Reserved
+            </div>
+            
+            <ul class="f_sns">
+                <li><a href="#" title=""><img src="./img/footer/sns_facebook.png" alt="페이스북"></a></li>
+                <li><a href="#" title=""><img src="./img/footer/sns_instagram.png" alt="인스타그램"></a></li>
+            </ul>
+            
+        </div>
+    </footer>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
